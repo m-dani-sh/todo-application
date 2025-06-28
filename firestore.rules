@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /tasks/{taskId} {
+      
+      // ✅ Allow reading only if the user owns the task
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+
+      // ✅ Allow creating only if the user is assigning the task to themselves
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+
+      // ✅ Allow update/delete only if the user owns the task
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+  }
+}
