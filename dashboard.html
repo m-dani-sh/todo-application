@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo App - Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Firebase SDK (Latest compat version) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="header-content">
+        <h1>My Todo List</h1>
+        <div class="user-info">
+          <span id="userEmail">Loading...</span>
+          <button onclick="logout()" class="logout-btn">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="todo-container">
+        <div class="add-task-section">
+          <div class="input-group">
+            <input type="text" id="taskInput" placeholder="What needs to be done?" />
+            <button onclick="addTask()" class="add-btn">Add Task</button>
+          </div>
+        </div>
+
+        <div class="tasks-section">
+          <div class="tasks-header">
+            <h2>Your Tasks</h2>
+            <span id="taskCount">0 tasks</span>
+          </div>
+          <ul id="taskList" class="task-list"></ul>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Task</h3>
+        <span class="close" onclick="closeEditModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="editTaskInput" placeholder="Task description" />
+        <div class="modal-actions">
+          <button onclick="saveEditTask()" class="save-btn">Save</button>
+          <button onclick="closeEditModal()" class="cancel-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="dashboard.js"></script>
+</body>
+</html>
